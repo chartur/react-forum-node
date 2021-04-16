@@ -8,7 +8,7 @@ export const jwtEncode = (user) => {
       user,
       privateKey,
       {
-        expiresIn: '1week',
+        expiresIn: expirationTime,
       },
       (err, token) => {
         if(err) {

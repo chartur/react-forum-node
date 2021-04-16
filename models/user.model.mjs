@@ -13,6 +13,8 @@ const schema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
+    index: true
   },
   image: {
     default: null,
@@ -21,6 +23,7 @@ const schema = new Schema({
       name: String
     }
   },
+  password: String,
   createdAt: {
     type: Date,
     default: new Date().toISOString()

@@ -2,12 +2,18 @@ import validate from "../../helpers/validate.mjs";
 import {body} from "express-validator";
 import UserModel from "../../models/user.model.mjs";
 import { jwtEncode } from '../../helpers/jwt.mjs'
+import bcrypt from 'bcrypt';
 
-export const SignUp = async (req, res) => {
-  const User = new UserModel(req.body);
+export const signUp = async (req, res) => {
   try {
-    const user = await User.save();
-    const userData = user.toObject({getters: true})
+    const userBody = req.body;
+    const salt = await bcrypt.genSalt(10);
+    userBody.password = await bcrypt.hash(req.body.password, salt);
+
+    let user = new UserModel(userBody);
+    user = await user.save();
+
+    const userData = user.toObject({getters: true});
     const token = await jwtEncode(userData);
     return res.json({
       user,
@@ -20,13 +26,9 @@ export const SignUp = async (req, res) => {
         message: e.message,
       })
   }
-  return res.json({
-    gago: 'gago',
-    user: req.body,
-  })
-}
+};
 
-export const signUpValidate = async (req, res, next) => {
+export const signUpValidate = (req, res, next) => {
   return validate([
     body('email')
       .isEmail()
@@ -37,4 +39,4 @@ export const signUpValidate = async (req, res, next) => {
       .isString()
       .isLength({min: 6}),
   ], req, res, next)
-}
+};
