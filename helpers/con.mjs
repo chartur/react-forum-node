@@ -3,7 +3,7 @@ export default (appListener) => {
   mongoose.connect('mongodb://localhost:27017/react', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useCreateIndex: true,
   });
 
