@@ -1,11 +1,13 @@
 import express from "express";
 const router = express.Router();
 import {
-  signUpValidate,
-  signInValidate,
   signUp,
   signIn,
   getLoggedInUser,
+
+  // validators
+  signUpValidate,
+  signInValidate,
   getLoggedInUserValidator
 } from "../controllers/auth/index.mjs";
 

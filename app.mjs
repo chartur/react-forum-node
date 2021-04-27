@@ -13,6 +13,7 @@ import indexRouter from './routes/index.mjs';
 import usersRouter from './routes/users.mjs';
 import authRouter from './routes/auth.mjs';
 import profileRouter from './routes/profile.mjs';
+import posts from './routes/posts.mjs';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: false }))
   .use('/users', usersRouter)
   .use('/auth', authRouter)
   .use('/profile', profileRouter)
+  .use('/posts', posts)
 
 con(() => {
   app.listen(port, () => {

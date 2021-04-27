@@ -4,9 +4,11 @@ import { getLoggedInUser, getLoggedInUserValidator } from "./get-logged-in-user.
 
 export {
   signUp,
-  signUpValidate,
   signIn,
-  signInValidate,
   getLoggedInUser,
+
+  // validations
+  signUpValidate,
+  signInValidate,
   getLoggedInUserValidator
 }

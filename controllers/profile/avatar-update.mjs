@@ -10,14 +10,13 @@ export default async (req, res) => {
       throw Error('Image url is required');
     }
 
-    const userUpdatedData = await UserModel.findByIdAndUpdate(user.id, {image: imageData});
+    const userUpdatedData = await UserModel.findByIdAndUpdate(user.id, {image: imageData}, {new: true});
     const u = userUpdatedData.toObject({getters: true});
     const token = await jwtEncode(u);
     return res.json({
       user: u,
       token
     })
-
   }catch (e) {
     return res.status(500)
       .json({

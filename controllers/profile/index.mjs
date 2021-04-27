@@ -1,5 +1,10 @@
 import profileImage from './avatar-update.mjs';
+import { profileDetailsValidation, updateProfileDetails } from "./update-user-profile-details.mjs";
 
 export {
-  profileImage
+  profileImage,
+  updateProfileDetails,
+
+  // validations
+  profileDetailsValidation
 }
