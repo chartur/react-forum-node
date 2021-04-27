@@ -24,6 +24,10 @@ const schema = new Schema({
     }
   },
   password: String,
+  bio: {
+    default: null,
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: new Date().toISOString()
@@ -32,6 +36,6 @@ const schema = new Schema({
   versionKey: false
 });
 
-const UserModel = model('users', schema)
+const UserModel = model('User', schema)
 
 export default UserModel;
