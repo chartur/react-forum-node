@@ -15,7 +15,9 @@ export const createPost = async (req, res) => {
     await post.populate('user', ['name', 'email', 'image']).execPopulate();
     post = post.toObject({getters: true});
 
-    req.socketObj.broadcast.emit('onNewPost', post);
+    if (req.socketObj){
+      req.socketObj.broadcast.emit('onNewPost', post);
+    }
 
     return  res.json({
       post

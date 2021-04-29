@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
+import environments from "../environments.js";
 export default (appListener) => {
-  const url = 'mongodb+srv://mern-app-db:SqcHvfEb-si5JfG@cluster0.yr0zs.mongodb.net/react?retryWrites=true&w=majority'
-  // const url = 'mongodb://localhost:27017/react'
+  const url = environments.dbUrl
   mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

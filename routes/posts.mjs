@@ -5,12 +5,14 @@ import authMiddleware from '../middlewares/auth.middleware.mjs';
 import {
   createPost,
   latestPostsGet,
+  getPost,
 
   // Validators
-  createPostValidator
+  createPostValidator,
 } from '../controllers/posts/index.mjs'
 
 router.get('/latest', latestPostsGet)
-  .post('/', createPostValidator, createPost)
+  .get('/:id', getPost)
+  .post('/', authMiddleware, createPostValidator, createPost)
 
 export default router;
