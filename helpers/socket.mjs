@@ -2,8 +2,8 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 import http from 'http';
 
-const socketPort = 9000;
-console.log(socketPort, 'gago');
+const socketPort = process.env.PORT ? process.env.PORT + 1 : 5001;
+console.log(socketPort, 'gago')
 const server = http.createServer();
 const io = require('socket.io')(server);
 server.listen(socketPort, () => {
