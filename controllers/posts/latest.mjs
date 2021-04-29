@@ -2,12 +2,11 @@ import PostsModal from "../../models/posts.model.mjs";
 
 export default async (req, res) => {
   const defaultCount = 10;
-
   try {
     const latest = await PostsModal
       .find()
-      .populate('user', ['name', 'email'])
-      .sort('createdAt')
+      .populate('user', ['name', 'email', 'image'])
+      .sort({createdAt: -1})
       .limit(defaultCount)
       .exec()
 

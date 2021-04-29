@@ -2,11 +2,13 @@ import express from 'express'
 import bodyParser from "body-parser";
 import cors from 'cors'
 import con from "./helpers/con.mjs";
+import './helpers/socket.mjs';
 
 const port = 5000;
 
 // Middlewares
 import appendUserToRequest from './middlewares/append-user-to-request.mjs';
+import appendSocketIdToRequest from './middlewares/append-socket-id-to-request.mjs';
 
 // Routes
 import indexRouter from './routes/index.mjs';
@@ -22,6 +24,7 @@ app.use(express.urlencoded({ extended: false }))
   .use(bodyParser.json())
   .use(cors())
   .use(appendUserToRequest)
+  .use(appendSocketIdToRequest)
 
   // Routing
   .use('/', indexRouter)
@@ -29,6 +32,8 @@ app.use(express.urlencoded({ extended: false }))
   .use('/auth', authRouter)
   .use('/profile', profileRouter)
   .use('/posts', posts)
+
+
 
 con(() => {
   app.listen(port, () => {
