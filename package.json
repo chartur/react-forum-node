@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "nodemon --trace-deprecation --experimental-modules app.mjs",
+    "start": "node --trace-deprecation --experimental-modules app.mjs",
     "dev": "nodemon --trace-deprecation --experimental-modules app.mjs"
   },
   "dependencies": {
