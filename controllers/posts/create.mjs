@@ -12,8 +12,10 @@ export const createPost = async (req, res) => {
     let post = new PostsModal(body)
     await post.save();
 
-    await post.populate('user', ['name', 'email']).execPopulate();
+    await post.populate('user', ['name', 'email', 'image']).execPopulate();
     post = post.toObject({getters: true});
+
+    req.socketObj.broadcast.emit('onNewPost', post);
 
     return  res.json({
       post
