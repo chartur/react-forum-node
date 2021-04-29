@@ -4,7 +4,7 @@ import cors from 'cors'
 import con from "./helpers/con.mjs";
 import './helpers/socket.mjs';
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Middlewares
 import appendUserToRequest from './middlewares/append-user-to-request.mjs';

@@ -2,10 +2,11 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 import http from 'http';
 
+const socketPort = +(process.env.PORT + 1) || 5001;
 const server = http.createServer();
 const io = require('socket.io')(server);
-server.listen(9000, () => {
-  console.log('socket on 9000 port')
+server.listen(socketPort, () => {
+  console.log(`socket on ${socketPort} port`)
 });
 let socketIds = [];
 
