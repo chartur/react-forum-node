@@ -11,7 +11,6 @@ import {
 } from '../controllers/posts/index.mjs'
 
 router.get('/latest', latestPostsGet)
-  .use(authMiddleware)
   .post('/', createPostValidator, createPost)
 
 export default router;
