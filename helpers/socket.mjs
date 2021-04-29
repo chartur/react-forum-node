@@ -1,25 +1,23 @@
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-import http from 'http';
 
-const socketPort = process.env.PORT;
-console.log(socketPort, 'gago')
-const server = http.createServer();
-const io = require('socket.io')(server);
-server.listen(socketPort, () => {
-  console.log(`socket on ${socketPort} port`)
-});
+let io;
 let socketIds = [];
 
-io.on('connection', (socket) => {
-  socketIds.push({id: socket.id, socket});
+const socketInit = (server) => {
+  io = require('socket.io')(server);
+  io.on('connection', (socket) => {
+    socketIds.push({id: socket.id, socket});
 
-  socket.on('disconnect', () => {
-    socketIds = socketIds.filter((s) => s.id !== socket.id);
+    socket.on('disconnect', () => {
+      socketIds = socketIds.filter((s) => s.id !== socket.id);
+    })
   })
-})
+}
+
 
 export {
   io,
-  socketIds
+  socketIds,
+  socketInit
 };

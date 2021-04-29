@@ -1,10 +1,11 @@
 import express from 'express'
 import bodyParser from "body-parser";
+import http from 'http';
 import cors from 'cors'
 import con from "./helpers/con.mjs";
-import './helpers/socket.mjs';
+import { socketInit } from './helpers/socket.mjs';
 
-const port = process.env.PORT || 5000;
+const port = +process.env.PORT || 5000;
 
 // Middlewares
 import appendUserToRequest from './middlewares/append-user-to-request.mjs';
@@ -18,6 +19,8 @@ import profileRouter from './routes/profile.mjs';
 import posts from './routes/posts.mjs';
 
 const app = express();
+const server = http.createServer(app);
+socketInit(server);
 
 app.use(express.urlencoded({ extended: false }))
   .use(bodyParser.urlencoded({ extended: false }))
@@ -36,7 +39,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 con(() => {
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
   })
 })
